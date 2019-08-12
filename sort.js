@@ -52,7 +52,33 @@ Sort.prototype.selection = function (order = 1) {
     return this._data;
 }
 
-// 
+
+// 插入排序
+// 去未排序的第一个数字，从尾部遍历已排序的，插入其中
+Sort.prototype.insertion = function (order = 1) {
+    for (let i = 1; i < this._data.length - 1; i ++) {
+        let insertVal = this._data[i]; //待插入的值
+        let j = 0;
+        for ( j = i-1 ; j >= 0 ; j --) {
+           
+            if(this._data[j] > insertVal) {
+                // 大于 没有找到坑
+                // 往后移，继续找
+                this._data[j+1] = this._data[j]; //当前的值后移，赋值给后一位
+
+            } else {
+                // 找到坑
+                break;
+            }
+        }
+        // 没有找到坑，插在第一位
+        this._data[j + 1] = insertVal; 
+    }
+    return this._data;
+}
+
+
+// test
 var arr = [20,43,21,3,33,42,12,1,2,2,45,12,56,48,99,121,454,55,22,458];
 var s = new Sort(arr);
 
@@ -60,5 +86,8 @@ var s = new Sort(arr);
 // console.log(s.bubble().toString());
 
 // selection sort
-console.log(s.selection(-1).toString());
+// console.log(s.selection(-1).toString());
+
+// insertion sort
+console.log(s.insertion());
 
